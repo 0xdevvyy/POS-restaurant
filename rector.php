@@ -3,6 +3,11 @@
 declare(strict_types=1);
 
 use Rector\Config\RectorConfig;
+use Rector\TypeDeclaration\Rector\ClassLike\AddVoidReturnTypeWhereNoReturnRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\AddReturnTypeDeclarationRector;
+use Rector\TypeDeclaration\Rector\ClassMethod\ReturnTypeFromStrictTypedCallRector;
+use Rector\TypeDeclaration\Rector\Closure\AddClosureVoidReturnTypeWhereNoReturnRector;
+use Rector\TypeDeclaration\Rector\Closure\ClosureReturnTypeRector;
 
 return RectorConfig::configure()
     ->withPaths([
@@ -16,6 +21,13 @@ return RectorConfig::configure()
     ])
     // uncomment to reach your current PHP version
     // ->withPhpSets()
-    ->withTypeCoverageLevel(0)
-    ->withDeadCodeLevel(0)
-    ->withCodeQualityLevel(0);
+    // ->withTypeCoverageLevel(4)
+    ->withDeadCodeLevel(1)
+    ->withCodeQualityLevel(1)
+    ->withRules([
+        AddClosureVoidReturnTypeWhereNoReturnRector::class,
+        AddReturnTypeDeclarationRector::class,
+        AddVoidReturnTypeWhereNoReturnRector::class,
+        ClosureReturnTypeRector::class,
+        ReturnTypeFromStrictTypedCallRector::class,
+    ]);

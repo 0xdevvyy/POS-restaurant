@@ -12,6 +12,7 @@ class Role extends Model
     /** @use HasFactory<RoleFactory> */
     use HasFactory;
 
+    /** @return HasMany<User, $this> */
     public function users(): HasMany
     {
         return $this->hasMany(User::class);

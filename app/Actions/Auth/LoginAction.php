@@ -31,6 +31,7 @@ final readonly class LoginAction
         // dd($role);
         return match ($role) {
             RoleEnum::ADMIN->value => to_route('dashboard'),
+            default => abort(404),
         };
     }
 }
