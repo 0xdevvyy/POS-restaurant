@@ -3,6 +3,7 @@
 
 namespace App\Actions\Auth;
 
+use App\Enum\RoleEnum;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
@@ -26,9 +27,10 @@ final readonly class LoginAction{
             'type' => 'success',
             'message' => 'Login Successfully Welcome'
         ]);
-        $role = Auth::user()->role;
-        return match($role->value){
-            //will add the routes when i created the role
+        $role = Auth::user()->role->name;
+        // dd($role);
+        return match($role){
+            RoleEnum::ADMIN->value => to_route('dashboard'),
         };
     }
 }
