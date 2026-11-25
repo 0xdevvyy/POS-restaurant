@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Actions\Auth;
 
 use App\Enum\RoleEnum;
@@ -9,11 +8,11 @@ use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use SensitiveParameter;
 
-final readonly class LoginAction{
-
-
-    public function login(string $email,#[SensitiveParameter()] string $password): RedirectResponse {
-        if(! Auth::attempt(['email' => $email, 'password' => $password])){
+final readonly class LoginAction
+{
+    public function login(string $email, #[SensitiveParameter()] string $password): RedirectResponse
+    {
+        if (! Auth::attempt(['email' => $email, 'password' => $password])) {
             Inertia::flash('toast', [
                 'type' => 'error',
                 'message' => 'Sorry Wrong Credentials Please Try Again!',
@@ -23,13 +22,14 @@ final readonly class LoginAction{
         }
         request()->session()->regenerate();
 
-        Inertia::flash('toast',[
+        Inertia::flash('toast', [
             'type' => 'success',
-            'message' => 'Login Successfully Welcome'
+            'message' => 'Login Successfully Welcome',
         ]);
         $role = Auth::user()->role->name;
+
         // dd($role);
-        return match($role){
+        return match ($role) {
             RoleEnum::ADMIN->value => to_route('dashboard'),
         };
     }

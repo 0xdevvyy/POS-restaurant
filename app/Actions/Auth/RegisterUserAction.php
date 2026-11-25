@@ -1,10 +1,11 @@
 <?php
 
-
 namespace App\Actions\Auth;
 
-final readonly class RegisterUserAction{
-    public function register(): void {
-        //will add 
+final readonly class RegisterUserAction
+{
+    public function register(): void
+    {
+        // will add
     }
 }

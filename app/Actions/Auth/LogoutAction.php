@@ -1,20 +1,17 @@
 <?php
 
-
 namespace App\Actions\Auth;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 
-final readonly class LogoutAction{
+final readonly class LogoutAction
+{
+    public function logout(): RedirectResponse
+    {
 
-
-
-    public function logout(): RedirectResponse{
-        
         Auth::logout();
-
 
         request()->session()->invalidate();
         request()->session()->regenerateToken();
@@ -23,7 +20,7 @@ final readonly class LogoutAction{
             'type' => 'success',
             'message' => 'Successfully Logout!',
         ]);
-        
+
         return to_route('login.index');
     }
 }

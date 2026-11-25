@@ -1,14 +1,14 @@
 <?php
 
-
 namespace App\Enum\Traits;
 
-trait HasValue {
-
+trait HasValue
+{
     /**
      * @return string[]
      */
-    public function value(): array {
+    public function value(): array
+    {
         return array_column(self::cases(), 'value');
     }
 }
